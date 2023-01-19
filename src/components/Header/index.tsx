@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import logoImg from '../../assets/logo.svg'
-import {HeaderStyles} from '../../styles/components/Header/header'
+import logoImg from '@/src/assets/logo.svg'
+import {HeaderStyles} from '@/src/styles/components/Header/header'
 
 export default function Header() {
   return (

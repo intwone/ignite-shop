@@ -1,3 +1,4 @@
+import Head from '@/src/components/Head'
 import { stripe } from '@/src/lib/stripe'
 import { createCheckout } from '@/src/services/checkout'
 import { ImageContainerStyles, ProductContainerStyles, ProductDetailsStyles } from '@/src/styles/pages/products'
@@ -34,29 +35,33 @@ export default function Product({ product }: ProductProps) {
   }
 
   return (
-    <ProductContainerStyles>
-      <ImageContainerStyles>
-        <Image src={product?.imageUrl} width={520} height={480} alt="" />
-      </ImageContainerStyles>
+    <>
+      <Head pageName={product.name}/>
 
-      <ProductDetailsStyles>
-        <h1>{product?.name}</h1>
-        <span>{product?.price}</span>
+      <ProductContainerStyles>
+        <ImageContainerStyles>
+          <Image src={product?.imageUrl} width={520} height={480} alt="" />
+        </ImageContainerStyles>
 
-        <p>{product?.description}</p>
+        <ProductDetailsStyles>
+          <h1>{product?.name}</h1>
+          <span>{product?.price}</span>
 
-        <button disabled={isCreatingCheckoutSession} onClick={handleByProduct}>
-          Comprar
-        </button>
-      </ProductDetailsStyles>
-    </ProductContainerStyles>
+          <p>{product?.description}</p>
+
+          <button disabled={isCreatingCheckoutSession} onClick={handleByProduct}>
+            Comprar
+          </button>
+        </ProductDetailsStyles>
+      </ProductContainerStyles>
+    </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [
-      { params: { id: 'prod_NBaNGx4bGvaLs2' } }
+      { params: { id: 'prod_NCIpOuKhYgCTK8' } }
     ],
     fallback: true
   }

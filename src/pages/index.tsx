@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { GetStaticProps } from "next";
 import { useKeenSlider } from 'keen-slider/react'
-import { HomeContainerStyles, ProductStyles } from "../styles/pages/home";
+import { HomeContainerStyles, ProductStyles } from "@/src/styles/pages/home";
 import 'keen-slider/keen-slider.min.css'
-import { stripe } from "../lib/stripe";
+import { stripe } from "@/src/lib/stripe";
 import Stripe from "stripe";
-import { priceFormatter } from "../utils/formatter";
+import { priceFormatter } from "@/src/utils/formatter";
 import Link from "next/link";
+import Head from "@/src/components/Head";
 
 interface HomeProps {
   products: {
@@ -26,20 +27,24 @@ export default function Home({products}: HomeProps) {
   })
 
   return (
-    <HomeContainerStyles ref={sliderRef} className="keen-slider">
-      {products.map(product => (
-        <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
-          <ProductStyles className="keen-slider__slide">
-            <Image src={product.imageUrl} width={520} height="480" alt=""/>
+    <>
+      <Head pageName="Home"/>
 
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </ProductStyles>
-        </Link>
-      ))}
-    </HomeContainerStyles>
+      <HomeContainerStyles ref={sliderRef} className="keen-slider">
+        {products.map(product => (
+          <Link href={`/product/${product.id}`} key={product.id} prefetch={false}>
+            <ProductStyles className="keen-slider__slide">
+              <Image src={product.imageUrl} width={520} height="480" alt=""/>
+
+              <footer>
+                <strong>{product.name}</strong>
+                <span>{product.price}</span>
+              </footer>
+            </ProductStyles>
+          </Link>
+        ))}
+      </HomeContainerStyles>
+    </>
   )
 }
 
